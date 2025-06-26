@@ -70,11 +70,11 @@ const sortCanonicallyInPlace = (items, selector) => {
   });
 };
 
-const outputsToOneKey = (
+const outputsToDigitalShield = (
   outputs: CardanoWasm.TransactionOutputs,
   changeAddress: IChangeAddress,
 ) => {
-  const onekeyOutputs = [];
+  const digitalshieldOutputs = [];
   for (let i = 0; i < outputs.len(); i++) {
     const output = outputs.get(i);
     const multiAsset = output.amount().multiasset();
@@ -187,16 +187,16 @@ const outputsToOneKey = (
     if (!datumHash) delete outputRes.datumHash;
     if (!inlineDatum) delete outputRes.inlineDatum;
     if (!referenceScript) delete outputRes.referenceScript;
-    onekeyOutputs.push(outputRes);
+    digitalshieldOutputs.push(outputRes);
   }
-  return onekeyOutputs;
+  return digitalshieldOutputs;
 };
 
 /**
  *
  * @param {Transaction} tx
  */
-export const txToOneKey = async (
+export const txToDigitalShield = async (
   rawTx: string,
   network: number,
   initKeys: Keys,
@@ -209,12 +209,12 @@ export const txToOneKey = async (
   let signingMode = CardanoTxSigningMode.ORDINARY_TRANSACTION;
 
   const outputs = tx.body().outputs();
-  const onekeyOutputs = outputsToOneKey(outputs, changeAddress);
+  const digitalshieldOutputs = outputsToDigitalShield(outputs, changeAddress);
 
-  let onekeyCertificates: [] | null = null;
+  let digitalshieldCertificates: [] | null = null;
   const certificates = tx.body().certs();
   if (certificates) {
-    onekeyCertificates = [];
+    digitalshieldCertificates = [];
     for (let i = 0; i < certificates.len(); i++) {
       const cert = certificates.get(i);
       const certificate: any = {};
@@ -275,7 +275,7 @@ export const txToOneKey = async (
           }
         }
         const relays = params.relays();
-        const onekeyRelays = [];
+        const digitalshieldRelays = [];
         for (let i = 0; i < relays.len(); i++) {
           const relay = relays.get(i);
           if (relay.kind() === 0) {
@@ -288,13 +288,13 @@ export const txToOneKey = async (
             const ipv6Address = singleHostAddr.ipv6()
               ? bytesToIp(singleHostAddr.ipv6().ip())
               : null;
-            onekeyRelays.push({ type, port, ipv4Address, ipv6Address });
+            digitalshieldRelays.push({ type, port, ipv4Address, ipv6Address });
           } else if (relay.kind() === 1) {
             const type = CardanoPoolRelayType.SINGLE_HOST_NAME;
             const singleHostName = relay.as_single_host_name();
             const port = singleHostName.port();
             const hostName = singleHostName.dns_name().record();
-            onekeyRelays.push({
+            digitalshieldRelays.push({
               type,
               port,
               hostName,
@@ -303,7 +303,7 @@ export const txToOneKey = async (
             const type = CardanoPoolRelayType.MULTIPLE_HOST_NAME;
             const multiHostName = relay.as_multi_host_name();
             const hostName = multiHostName.dns_name();
-            onekeyRelays.push({
+            digitalshieldRelays.push({
               type,
               hostName,
             });
@@ -339,19 +339,19 @@ export const txToOneKey = async (
           },
           rewardAccount,
           owners: poolOwners,
-          relays: onekeyRelays,
+          relays: digitalshieldRelays,
           metadata,
         };
       }
-      onekeyCertificates.push(certificate);
+      digitalshieldCertificates.push(certificate);
     }
   }
   const fee = tx.body().fee().to_str();
   const ttl = tx.body().ttl();
   const withdrawals = tx.body().withdrawals();
-  let onekeyWithdrawals = null;
+  let digitalshieldWithdrawals = null;
   if (withdrawals) {
-    onekeyWithdrawals = [];
+    digitalshieldWithdrawals = [];
     for (let i = 0; i < withdrawals.keys().len(); i++) {
       const withdrawal = {};
       const rewardAddress = withdrawals.keys().get(i);
@@ -363,7 +363,7 @@ export const txToOneKey = async (
         ).toString('hex');
       }
       withdrawal.amount = withdrawals.get(rewardAddress).to_str();
-      onekeyWithdrawals.push(withdrawal);
+      digitalshieldWithdrawals.push(withdrawal);
     }
   }
   const auxiliaryData = tx.body().auxiliary_data_hash()
@@ -484,7 +484,7 @@ export const txToOneKey = async (
     if (tx.body().collateral_return()) {
       const outputs = CardanoWasm.TransactionOutputs.new();
       outputs.add(tx.body().collateral_return());
-      const [out] = outputsToOneKey(outputs, changeAddress);
+      const [out] = outputsToDigitalShield(outputs, changeAddress);
       return out;
     }
     return null;
@@ -504,14 +504,14 @@ export const txToOneKey = async (
     // ignore
   }
 
-  const onekeyTx = {
+  const digitalshieldTx = {
     signingMode,
-    outputs: onekeyOutputs,
+    outputs: digitalshieldOutputs,
     fee,
     ttl: ttl ? `${ttl}` : null,
     validityIntervalStart,
-    certificates: onekeyCertificates,
-    withdrawals: onekeyWithdrawals,
+    certificates: digitalshieldCertificates,
+    withdrawals: digitalshieldWithdrawals,
     auxiliaryData,
     mint: mintBundle,
     scriptDataHash,
@@ -526,11 +526,11 @@ export const txToOneKey = async (
     referenceInputs,
     tagCborSets,
   };
-  Object.keys(onekeyTx).forEach(
-    key => !onekeyTx[key] && onekeyTx[key] != 0 && delete onekeyTx[key],
+  Object.keys(digitalshieldTx).forEach(
+    key => !digitalshieldTx[key] && digitalshieldTx[key] != 0 && delete digitalshieldTx[key],
   );
-  console.log('format onekey cardano hardware Tx =====>>> : ', onekeyTx);
-  return Promise.resolve(onekeyTx);
+  console.log('format digitalshield cardano hardware Tx =====>>> : ', digitalshieldTx);
+  return Promise.resolve(digitalshieldTx);
 };
 
 const bytesToIp = bytes => {

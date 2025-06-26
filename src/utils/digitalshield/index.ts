@@ -1,15 +1,15 @@
 import { composeTxPlan } from './transaction';
 import { signTransaction, signTx } from './signTx';
 import { dAppUtils } from './dapp';
-import { txToOneKey } from './txToOneKey';
+import { txToDigitalShield } from './txToDigitalShield';
 import { hasSetTagWithBody } from './hasSetTag';
 
-const onekeyUtils = {
+const digitalshieldUtils = {
   composeTxPlan,
   signTransaction,
   signTx,
-  txToOneKey,
+  txToDigitalShield,
   hasSetTagWithBody,
 };
 
-export { onekeyUtils, dAppUtils };
+export { digitalshieldUtils, dAppUtils };

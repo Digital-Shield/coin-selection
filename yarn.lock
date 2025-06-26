@@ -912,6 +912,38 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@digitalshieldfe/cardano-coin-selection-asmjs@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@digitalshieldfe/cardano-coin-selection-asmjs@workspace:."
+  dependencies:
+    "@emurgo/cardano-message-signing-asmjs": "npm:^1.0.1"
+    "@emurgo/cardano-serialization-lib-asmjs": "npm:13.2.0"
+    "@emurgo/cardano-serialization-lib-nodejs": "npm:13.2.0"
+    "@eslint/js": "npm:^9.11.1"
+    "@swc-node/jest": "npm:^1.8.12"
+    "@swc/core": "npm:1.7.26"
+    "@swc/helpers": "npm:^0.5.13"
+    "@types/jest": "npm:^29.5.13"
+    "@types/node": "npm:^16.3.2"
+    "@typescript-eslint/eslint-plugin": "npm:^8.8.0"
+    "@typescript-eslint/parser": "npm:8.8.0"
+    bignumber.js: "npm:^9.0.1"
+    eslint: "npm:^9.11.1"
+    eslint-config-prettier: "npm:^9.1.0"
+    eslint-plugin-import: "npm:^2.30.0"
+    eslint-plugin-prettier: "npm:^5.2.1"
+    jest: "npm:^29.7.0"
+    make-coverage-badge: "npm:^1.2.0"
+    npm-run-all: "npm:^4.1.5"
+    prettier: "npm:3.3.3"
+    rimraf: "npm:^6.0.1"
+    typescript: "npm:^5.6.2"
+    typescript-eslint: "npm:^8.8.0"
+  peerDependencies:
+    bignumber.js: ^9.0.1
+  languageName: unknown
+  linkType: soft
+
 "@emnapi/core@npm:^1.1.0":
   version: 1.2.0
   resolution: "@emnapi/core@npm:1.2.0"
@@ -1607,38 +1639,6 @@ __metadata:
   checksum: 10/c96381d4a37448ea280951e46233f7e541058cf57a57d4094dd4bdcaae43fa5872b5f2eb6bfb004591a68e29c5877abe3cdc210cb3588cbf20ab2877f31a7de7
   languageName: node
   linkType: hard
-
-"@onekeyfe/cardano-coin-selection-asmjs@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "@onekeyfe/cardano-coin-selection-asmjs@workspace:."
-  dependencies:
-    "@emurgo/cardano-message-signing-asmjs": "npm:^1.0.1"
-    "@emurgo/cardano-serialization-lib-asmjs": "npm:13.2.0"
-    "@emurgo/cardano-serialization-lib-nodejs": "npm:13.2.0"
-    "@eslint/js": "npm:^9.11.1"
-    "@swc-node/jest": "npm:^1.8.12"
-    "@swc/core": "npm:1.7.26"
-    "@swc/helpers": "npm:^0.5.13"
-    "@types/jest": "npm:^29.5.13"
-    "@types/node": "npm:^16.3.2"
-    "@typescript-eslint/eslint-plugin": "npm:^8.8.0"
-    "@typescript-eslint/parser": "npm:8.8.0"
-    bignumber.js: "npm:^9.0.1"
-    eslint: "npm:^9.11.1"
-    eslint-config-prettier: "npm:^9.1.0"
-    eslint-plugin-import: "npm:^2.30.0"
-    eslint-plugin-prettier: "npm:^5.2.1"
-    jest: "npm:^29.7.0"
-    make-coverage-badge: "npm:^1.2.0"
-    npm-run-all: "npm:^4.1.5"
-    prettier: "npm:3.3.3"
-    rimraf: "npm:^6.0.1"
-    typescript: "npm:^5.6.2"
-    typescript-eslint: "npm:^8.8.0"
-  peerDependencies:
-    bignumber.js: ^9.0.1
-  languageName: unknown
-  linkType: soft
 
 "@oxc-resolver/binding-darwin-arm64@npm:1.12.0":
   version: 1.12.0
